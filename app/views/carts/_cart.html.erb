@@ -1,8 +1,7 @@
-<%= current_cart.line_items.each do |a| %>
+<% current_cart.line_items.each do |a| %>
   <tr>
     <td>
-      <%= link_to image_tag("products/6.jpg") %>
-     <img width="60" src="themes/images/products/4.jpg" alt=""/></td>
+      <%= link_to image_tag(a.product.images.first.image, size: 100) %>
     <td><%= a.product.name %><br/>Color : black, Material : metal</td>
     <td>
     <div class="input-append">
@@ -17,8 +16,8 @@
       </button>
     </div>
     </td>
-    <td><%= a.product.export_price %></td>
+    <td><%= number_to_currency(a.product.export_price, unit: "$", precision: 0, format: "%u %n") %></td>
     <td><%= a.product.sale %></td>
-    <td><%= a.total_price %></td>
+    <td><%= number_to_currency(a.total_price, unit: "$", precision: 0, format: "%u %n")%></td>
   </tr>
 <% end %>
