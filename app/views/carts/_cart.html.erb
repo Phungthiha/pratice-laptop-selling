@@ -6,15 +6,17 @@
     <td class="col-md-3">
       <div class="form-group">
         <input class="pull-left quantity-item col-md-2" value="<%= a.quantity%>"
-           size="16" type="text">
+          data-id="<%= current_cart.id %>"
+          data-line-item-id="<%= a.id %>"
+          size="16" type="text">
         <div class="pull-left">
-          <button class="btn" type="button"><i class="icon-minus"></i>
-          </button>
-          <button class="btn" type="button"><i class="icon-plus"></i>
-          </button>
-          <button class="btn btn-danger" type="button">
+          <a class="btn" href="<%= '/change_quantity/' << current_cart.id.to_s << '?type=decrease&line_item_id=' << a.id.to_s %>" data-remote="true"><i class="icon-minus"></i>
+          </a>
+          <a class="btn" href="<%= '/change_quantity/' << current_cart.id.to_s << '?type=increase&line_item_id=' << a.id.to_s %>" data-remote="true"><i class="icon-plus"></i>
+          </a>
+          <a class="btn btn-danger" href="<%= '/change_quantity/' << current_cart.id.to_s << '?type=remove&line_item_id=' << a.id.to_s %>" data-remote="true">
             <i class="icon-remove icon-white"></i>
-          </button>
+          </a>
         </div>
       </div>
     </td>
@@ -23,3 +25,14 @@
     <td class="col-md-1"><%= number_to_currency(a.total_price, unit: "$", precision: 0, format: "%u %n")%></td>
   </tr>
 <% end %>
+<tr>
+  <td>
+    <%= button_to @cart, {:method => :delete, class: 'btn btn-warning', style: "margin-top: 10%;"},
+      data: {:confirm => t("mess_delete")} do %>
+      <i ><%= t "view_cart.btn_empty_cart" %></i>
+    <% end %>
+  </td>
+  <td colspan="5" style="text-align:right">
+    <%= number_to_currency(current_cart.total_price, unit: "$", precision: 0, format: "%u %n") %>
+  </td>
+</tr>
