@@ -28,6 +28,7 @@
       <% if logged_in? %>
         <% if session[:admin] %>
           <li><%= link_to "Manage Products", admin_path %></li>
+          <li><%= link_to "Manage Orders", orders_path %></li>
         <% end %>
           <li><%= link_to "Log out", logout_path, method: :delete %></li>
       <% else %>
