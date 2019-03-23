@@ -1,23 +1,25 @@
 <% current_cart.line_items.each do |a| %>
   <tr>
-    <td>
+    <td class="col-md-2">
       <%= link_to image_tag(a.product.images.first.image, size: 100) %>
-    <td><%= a.product.name %><br/>Color : black, Material : metal</td>
-    <td>
-    <div class="input-append">
-      <input class="span1" style="max-width:34px" value="<%= a.quantity%>"
-        id="appendedInputButtons" size="16" type="text">
-      <button class="btn" type="button"><i class="icon-minus"></i>
-      </button>
-      <button class="btn" type="button"><i class="icon-plus"></i>
-      </button>
-      <button class="btn btn-danger" type="button">
-        <i class="icon-remove icon-white"></i>
-      </button>
-    </div>
+    <td class="col-md-4"><%= a.product.name %><br/>Color : black, Material : metal</td>
+    <td class="col-md-3">
+      <div class="form-group">
+        <input class="pull-left quantity-item col-md-2" value="<%= a.quantity%>"
+           size="16" type="text">
+        <div class="pull-left">
+          <button class="btn" type="button"><i class="icon-minus"></i>
+          </button>
+          <button class="btn" type="button"><i class="icon-plus"></i>
+          </button>
+          <button class="btn btn-danger" type="button">
+            <i class="icon-remove icon-white"></i>
+          </button>
+        </div>
+      </div>
     </td>
-    <td><%= number_to_currency(a.product.export_price, unit: "$", precision: 0, format: "%u %n") %></td>
-    <td><%= a.product.sale %></td>
-    <td><%= number_to_currency(a.total_price, unit: "$", precision: 0, format: "%u %n")%></td>
+    <td class="col-md-1"><%= number_to_currency(a.product.export_price, unit: "$", precision: 0, format: "%u %n") %></td>
+    <td class="col-md-1"><%= a.product.sale %></td>
+    <td class="col-md-1"><%= number_to_currency(a.total_price, unit: "$", precision: 0, format: "%u %n")%></td>
   </tr>
 <% end %>

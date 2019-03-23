@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   before_action :search_product, only: %i(edit update)
 
   def index
-    @product = Product.all
+    @product = Product.all.page params[:page]
   end
 
   def new
